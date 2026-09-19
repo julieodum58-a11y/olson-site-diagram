@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Olson Property — Live Oak Arborist Site Diagram | September 2026</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        base: { 950:'#0a0f1a', 900:'#0f172a', 800:'#1e293b', 700:'#334155', 600:'#475569', 500:'#64748b', 400:'#94a3b8', 300:'#cbd5e1' },
+                        leaf: { 50:'#f0fdf4', 100:'#dcfce7', 200:'#bbf7d0', 500:'#22c55e', 600:'#16a34a', 700:'#15803d', 800:'#166534' },
+                        warn: { 50:'#fffbeb', 100:'#fef3c7', 400:'#fbbf24', 500:'#f59e0b', 600:'#d97706', 700:'#b45309' },
+                        danger: { 50:'#fef2f2', 100:'#fee2e2', 500:'#ef4444', 600:'#dc2626', 700:'#b91c1c' },
+                        water: { 50:'#eff6ff', 400:'#60a5fa', 500:'#3b82f6', 600:'#2563eb', 700:'#1d4ed8' },
+                        holly: { 400:'#fb923c', 500:'#f97316', 600:'#ea580c' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter','system-ui','sans-serif'],
+                        mono: ['JetBrains Mono','monospace']
+                    }
+                }
+            }
+        };
+    </script>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background: #0f172a; color: #e2e8f0; font-family: 'Inter', system-ui, sans-serif; overflow: hidden; height: 100vh; }
+        .tree-hit { cursor: pointer; }
+        .tree-hit:hover { filter: drop-shadow(0 0 8px currentColor) brightness(1.15); }
+        .slide-panel {
+            position: fixed; right: -360px; top: 48px; bottom: 24px; width: 340px; max-width: 95vw;
+            background: white; border-left: 1px solid #e2e8f0; z-index: 50;
+            transition: right 0.35s cubic-bezier(0.4,0,0.2,1); overflow-y: auto;
+            box-shadow: -4px 0 30px rgba(0,0,0,0.18); color: #1e293b;
+        }
+        .slide-panel.open { right: 0; }
+        .tab-content { display: none; }
+        .tab-content.active { display: flex; flex-direction: column; }
+        .concern-acc { cursor: pointer; transition: box-shadow 0.2s; }
+        .concern-acc:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.07); }
+        .concern-acc .acc-body { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
+        .concern-acc.open .acc-body { max-height: 500px; }
+        .concern-acc .chev { transition: transform 0.3s; }
+        .concern-acc.open .chev { transform: rotate(180deg); }
+        @media (max-width: 640px) { .slide-panel { width: 100vw; max-width: 100vw; } }
+    </style>
+</head>
+<body data-id="0">
+    <app-icon data-id="1" hidden data-icon="tree-pine" data-palette="Green"></app-icon>
+
+    <!-- ═══ HEADER ═══ -->
+    <header data-id="2" id="header-bar-a1b2" class="fixed top-0 left-0 right-0 h-12 bg-base-800 border-b border-base-700 flex items-center justify-between px-4 z-50 no-print">
+        <div data-id="3" id="header-left-c3d4" class="flex items-center gap-2 min-w-0">
+            <i data-id="4" data-lucide="tree-pine" class="w-5 h-5 text-leaf-500 shrink-0"></i>
+            <div data-id="5" class="min-w-0">
+                <h1 data-id="6" id="title-e5f6" class="text-sm font-bold tracking-wide text-white truncate">Olson Property — Live Oak Arborist Site Diagram</h1>
+                <p data-id="7" id="subtitle-g7h8" class="text-[10px] text-base-400 truncate hidden sm:block">Prepared September 2026 · McKinney, TX · Field measurements: August 2026 · Scale 1 px = 1 in</p>
+            </div>
+        </div>
+        <div data-id="8" id="header-tabs-i9j0" class="flex items-center gap-1 shrink-0">
+            <button data-id="9" id="tab-diagram" class="tab-btn px-3 py-1.5 text-sm font-medium rounded-md bg-green-700 text-white flex items-center gap-1">
+                <i data-id="10" data-lucide="map" class="w-3.5 h-3.5"></i><span data-id="11" class="hidden sm:inline">Site Diagram</span>
+            </button>
+            <button data-id="12" id="tab-timeline" class="tab-btn px-3 py-1.5 text-sm font-medium rounded-md bg-base-700 text-base-300 hover:bg-base-600 flex items-center gap-1">
+                <i data-id="13" data-lucide="calendar-clock" class="w-3.5 h-3.5"></i><span data-id="14" class="hidden sm:inline">2020 Timeline</span>
+            </button>
+            <button data-id="15" id="tab-concerns" class="tab-btn px-3 py-1.5 text-sm font-medium rounded-md bg-base-700 text-base-300 hover:bg-base-600 flex items-center gap-1">
+                <i data-id="16" data-lucide="alert-triangle" class="w-3.5 h-3.5"></i><span data-id="17" class="hidden sm:inline">Concerns &amp; Tx</span>
+            </button>
+            <button data-id="18" id="tab-legend" class="tab-btn px-3 py-1.5 text-sm font-medium rounded-md bg-base-700 text-base-300 hover:bg-base-600 flex items-center gap-1">
+                <i data-id="19" data-lucide="list" class="w-3.5 h-3.5"></i><span data-id="20" class="hidden sm:inline">Legend</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- ═══════════════ TAB 1: SITE DIAGRAM ═══════════════ -->
+    <div data-id="21" id="view-diagram" class="tab-content active pt-12 h-screen w-screen overflow-auto">
+        <svg data-id="22" id="site-svg-k1l2" viewBox="0 0 820 530" xmlns="http://www.w3.org/2000/svg" class="w-full h-full" style="min-width:700px;min-height:460px;background:#f0fdf4;">
+            <defs data-id="23">
+                <pattern data-id="24" id="slopeHatch" patternUnits="userSpaceOnUse" width="8" height="8" patternTransform="rotate(45)">
+                    <line data-id="25" x1="0" y1="0" x2="0" y2="8" stroke="#92400e" stroke-width="1" stroke-opacity="0.3"/>
+                </pattern>
+                <marker data-id="26" id="arr" markerWidth="8" markerHeight="6" refX="4" refY="3" orient="auto" fill="#475569"><polygon data-id="27" points="0 0,8 3,0 6"/></marker>
+                <marker data-id="28" id="arrR" markerWidth="8" markerHeight="6" refX="4" refY="3" orient="auto-start-reverse" fill="#475569"><polygon data-id="29" points="0 0,8 3,0 6"/></marker>
+                <marker data-id="30" id="arrDanger" markerWidth="8" markerHeight="6" refX="4" refY="3" orient="auto" fill="#dc2626"><polygon data-id="31" points="0 0,8 3,0 6"/></marker>
+                <marker data-id="32" id="arrDangerR" markerWidth="8" markerHeight="6" refX="4" refY="3" orient="auto-start-reverse" fill="#dc2626"><polygon data-id="33" points="0 0,8 3,0 6"/></marker>
+                <marker data-id="34" id="arrAmber" markerWidth="8" markerHeight="6" refX="4" refY="3" orient="auto" fill="#b45309"><polygon data-id="35" points="0 0,8 3,0 6"/></marker>
+                <marker data-id="36" id="arrAmberR" markerWidth="8" markerHeight="6" refX="4" refY="3" orient="auto-start-reverse" fill="#b45309"><polygon data-id="37" points="0 0,8 3,0 6"/></marker>
+                <marker data-id="38" id="arrGreen" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto" fill="#22c55e"><polygon data-id="39" points="0 0,7 2.5,0 5"/></marker>
+                <marker data-id="40" id="arrGreenR" markerWidth="7" markerHeight="5" refX="0" refY="2.5" orient="auto" fill="#22c55e"><polygon data-id="41" points="7 0,0 2.5,7 5"/></marker>
+                <marker data-id="42" id="arrBlue" markerWidth="7" markerHeight="5" refX="3.5" refY="2.5" orient="auto" fill="#2563eb"><polygon data-id="43" points="0 0,7 2.5,0 5"/></marker>
+                <marker data-id="44" id="arrPurple" markerWidth="8" markerHeight="6" refX="4" refY="3" orient="auto" fill="#7c3aed"><polygon data-id="45" points="0 0,8 3,0 6"/></marker>
+                <marker data-id="46" id="arrPurpleR" markerWidth="8" markerHeight="6" refX="4" refY="3" orient="auto-start-reverse" fill="#7c3aed"><polygon data-id="47" points="0 0,8 3,0 6"/></marker>
+            </defs>
+
+            <!-- ═══ LAYER 1: BACKGROUND FILLS ═══ -->
+            <!-- Street -->
+            <rect data-id="48" x="0" y="450" width="820" height="70" fill="#94a3b8"/>
+            <text data-id="49" x="410" y="490" text-anchor="middle" fill="white" font-size="13" font-family="Inter" font-weight="700" letter-spacing="2">STREET</text>
+
+            <!-- Parkway -->
+            <rect data-id="50" x="0" y="392" width="820" height="58" fill="#bbf7d0"/>
+            <text data-id="51" x="410" y="425" text-anchor="middle" fill="#166534" font-size="10" font-family="Inter" font-weight="600">PARKWAY — 4 ft 10 in</text>
+
+            <!-- Sidewalk -->
+            <rect data-id="52" x="0" y="344" width="820" height="48" fill="#cbd5e1" stroke="#94a3b8" stroke-width="1"/>
+            <text data-id="53" x="410" y="372" text-anchor="middle" fill="#334155" font-size="10" font-family="Inter" font-weight="600">SIDEWALK — 4 ft</text>
+
+            <!-- Slope zone hatch — starts at retaining wall (y=201) to sidewalk (y=344) = 143" -->
+            <rect data-id="54" x="166" y="201" width="654" height="143" fill="url(#slopeHatch)"/>
+            <rect data-id="55" x="166" y="201" width="654" height="143" fill="#fbbf24" fill-opacity="0.06"/>
+
+            <!-- 84" fill zone overlay — from root flare area (y=170) to retaining wall (y=201) mapped as zone in front of tree -->
+            <!-- Visually: the 84" soil/compost fill zone between root flare and retaining wall front -->
+            <rect data-id="56" x="166" y="170" width="654" height="31" fill="#9333ea" fill-opacity="0.12" stroke="#7c3aed" stroke-width="1" stroke-dasharray="5 3" stroke-opacity="0.6"/>
+
+            <!-- Expansion zone overlay — 84" from root flare to retaining wall front (now labeled as fill zone) -->
+            <rect data-id="57" x="166" y="201" width="654" height="84" fill="#fbbf24" fill-opacity="0.22" stroke="#d97706" stroke-width="1" stroke-dasharray="6 3" stroke-opacity="0.5"/>
+
+            <!-- Front lawn -->
+            <rect data-id="58" x="166" y="50" width="654" height="120" fill="#dcfce7"/>
+            <text data-id="59" x="500" y="92" text-anchor="middle" fill="#166534" font-size="9" font-family="Inter" font-weight="500" opacity="0.5">FRONT LAWN</text>
+
+            <!-- Entryway pavement -->
+            <rect data-id="60" x="0" y="50" width="166" height="394" fill="#e2e8f0" stroke="#94a3b8" stroke-width="0.5"/>
+            <text data-id="61" x="83" y="260" text-anchor="middle" fill="#475569" font-size="10" font-family="Inter" font-weight="600" transform="rotate(-90,83,260)">ENTRY PAVEMENT — 12 ft to Live Oak</text>
+
+            <!-- House -->
+            <rect data-id="62" x="0" y="0" width="820" height="50" fill="#fca5a5" fill-opacity="0.85"/>
+            <rect data-id="63" x="100" y="8" width="620" height="34" rx="4" fill="white" fill-opacity="0.88"/>
+            <text data-id="64" x="410" y="23" text-anchor="middle" fill="#991b1b" font-size="11" font-family="Inter" font-weight="800">HOUSE (BRICK) — Foundation 10 ft from Live Oak</text>
+            <text data-id="65" x="410" y="36" text-anchor="middle" fill="#b91c1c" font-size="9" font-family="Inter" font-weight="500">120" to trunk center</text>
+
+            <!-- Slope zone label — CORRECTED: 143" is from retaining wall front to stake -->
+            <rect data-id="66" x="290" y="220" width="280" height="40" rx="5" fill="white" fill-opacity="0.92" stroke="#b45309" stroke-width="1" stroke-opacity="0.4"/>
+            <text data-id="67" x="430" y="236" text-anchor="middle" fill="#92400e" font-size="11" font-family="Inter" font-weight="700">SLOPE ZONE</text>
+            <text data-id="68" x="430" y="250" text-anchor="middle" fill="#b45309" font-size="9" font-family="Inter" font-weight="500">Run: 143" (wall front → stake) | Drop: 27" | 18.9%</text>
+
+            <!-- 84" fill zone label -->
+            <rect data-id="69" x="210" y="264" width="400" height="14" rx="3" fill="white" fill-opacity="0.88"/>
+            <text data-id="70" x="410" y="274" text-anchor="middle" fill="#7c3aed" font-size="9" font-family="Inter" font-weight="600">84" FILL ZONE — New soil/compost over root zone (2020)</text>
+
+            <!-- Feeder root trap label -->
+            <text data-id="71" x="200" y="213" fill="#b45309" font-size="10" font-family="Inter" font-weight="600" font-style="italic">FEEDER ROOT TRAP ZONE</text>
+
+            <!-- ═══ CORRECTION 2: NEIGHBOR PROPERTY LINE ═══ -->
+            <line data-id="72" x1="574" y1="50" x2="574" y2="344" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="8 4"/>
+            <text data-id="73" x="576" y="80" fill="#64748b" font-size="9" font-family="Inter" font-weight="600" transform="rotate(-90,576,80)">NEIGHBOR PROPERTY LINE (~22 ft)</text>
+
+            <!-- ═══ LAYER 2: RETAINING WALLS ═══ -->
+            <!-- NEW 2020 wall -->
+            <line data-id="74" x1="166" y1="201" x2="770" y2="201" stroke="#1e293b" stroke-width="6"/>
+            <!-- Hash marks -->
+            <line data-id="75" x1="201" y1="201" x2="207" y2="213" stroke="#1e293b" stroke-width="1.5"/>
+            <line data-id="76" x1="236" y1="201" x2="242" y2="213" stroke="#1e293b" stroke-width="1.5"/>
+            <line data-id="77" x1="271" y1="201" x2="277" y2="213" stroke="#1e293b" stroke-width="1.5"/>
+            <line data-id="78" x1="306" y1="201" x2="312" y2="213" stroke="#1e293b" stroke-width="1.5"/>
+            <line data-id="79" x1="341" y1="201" x2="347" y2="213" stroke="#1e293b" stroke-width="1.5"/>
+            <line data-id="80" x1="376" y1="201" x2="382" y2="213" stroke="#1e293b" stroke-width="1.5"/>
+            <line data-id="81" x1="411" y1="201" x2="417" y2="213" stroke="#1e293b" stroke-width="1.5"/>
+            <line data-id="82" x1="446" y1="201" x2="452" y2="213" stroke="#1e293b" stroke-width="1.5"/>
+            <line data-id="83" x1="481" y1="201" x2="487" y2="213" stroke="#1e293b" stroke-width="1.5"/>
+            <line data-id="84" x1="516" y1="201" x2="522" y2="213" stroke="#1e293b" stroke-width="1.5"/>
+            <line data-id="85" x1="551" y1="201" x2="557" y2="213" stroke="#1e293b" stroke-width="1.5"/>
+            <line data-id="86" x1="586" y1="201" x2="592" y2="213" stroke="#1e293b" stroke-width="1.5"/>
+            <line data-id="87" x1="621" y1="201" x2="627" y2="213" stroke="#1e293b" stroke-width="1.5"/>
+            <line data-id="88" x1="656" y1="201" x2="662" y2="213" stroke="#1e293b" stroke-width="1.5"/>
+            <line data-id="89" x1="691" y1="201" x2="697" y2="213" stroke="#1e293b" stroke-width="1.5"/>
+            <line data-id="90" x1="726" y1="201" x2="732" y2="213" stroke="#1e293b" stroke-width="1.5"/>
+            <!-- New wall label — CORRECTED: 84" from root flare, 143" from wall front to stake -->
+            <rect data-id="91" x="172" y="183" width="490" height="14" rx="2" fill="white" fill-opacity="0.94"/>
+            <text data-id="92" x="417" y="194" text-anchor="middle" fill="#dc2626" font-size="10" font-family="Inter" font-weight="700">▶ NEW RETAINING WALL (2020) — 84" FROM ROOT FLARE | 143" WALL FRONT → STAKE</text>
+
+            <!-- ORIGINAL wall -->
+            <line data-id="93" x1="166" y1="285" x2="770" y2="285" stroke="#64748b" stroke-width="2.5" stroke-dasharray="10 5"/>
+            <rect data-id="94" x="180" y="288" width="440" height="14" rx="2" fill="white" fill-opacity="0.88"/>
+            <text data-id="95" x="400" y="299" text-anchor="middle" fill="#64748b" font-size="9" font-family="Inter" font-weight="600">— — ORIGINAL WALL (pre-2020) — ~115" from trunk | 59" to sidewalk</text>
+
+            <!-- ═══ LAYER 3: DIMENSION ARROWS ═══ -->
+            <!-- House to tree: x=793 y=50→170 -->
+            <line data-id="96" x1="793" y1="50" x2="793" y2="170" stroke="#475569" stroke-width="1.2" marker-start="url(#arrR)" marker-end="url(#arr)"/>
+            <line data-id="97" x1="789" y1="50" x2="797" y2="50" stroke="#475569" stroke-width="1"/>
+            <line data-id="98" x1="789" y1="170" x2="797" y2="170" stroke="#475569" stroke-width="1"/>
+            <text data-id="99" x="800" y="114" fill="#334155" font-size="9" font-family="Inter" font-weight="700" transform="rotate(90,800,114)" text-anchor="middle">10 ft (120")</text>
+
+            <!-- CORRECTED: Root flare to retaining wall front: 84" bracket (PURPLE) -->
+            <line data-id="100" x1="780" y1="170" x2="780" y2="201" stroke="#7c3aed" stroke-width="1.5" marker-start="url(#arrPurpleR)" marker-end="url(#arrPurple)"/>
+            <line data-id="101" x1="776" y1="170" x2="784" y2="170" stroke="#7c3aed" stroke-width="1"/>
+            <line data-id="102" x1="776" y1="201" x2="784" y2="201" stroke="#7c3aed" stroke-width="1"/>
+            <rect data-id="103" x="764" y="179" width="32" height="14" rx="2" fill="white" fill-opacity="0.95"/>
+            <text data-id="104" x="780" y="189" fill="#7c3aed" font-size="9" font-family="Inter" font-weight="800" text-anchor="middle">84"</text>
+            <!-- 84" label callout -->
+            <rect data-id="105" x="686" y="172" width="82" height="10" rx="2" fill="white" fill-opacity="0.92"/>
+            <text data-id="106" x="727" y="180" fill="#7c3aed" font-size="7" font-family="Inter" font-weight="600" text-anchor="middle">root flare → wall</text>
+
+            <!-- CORRECTED: Retaining wall front to sidewalk: 143" bracket (GRAY) -->
+            <line data-id="107" x1="808" y1="201" x2="808" y2="344" stroke="#475569" stroke-width="1" marker-start="url(#arrR)" marker-end="url(#arr)"/>
+            <line data-id="108" x1="804" y1="201" x2="812" y2="201" stroke="#475569" stroke-width="1"/>
+            <line data-id="109" x1="804" y1="344" x2="812" y2="344" stroke="#475569" stroke-width="1"/>
+            <text data-id="110" x="815" y="276" fill="#334155" font-size="9" font-family="Inter" font-weight="700" transform="rotate(90,815,276)" text-anchor="middle">143" (wall → stake)</text>
+
+            <!-- Expansion zone: x=758 y=201→285 -->
+            <line data-id="111" x1="758" y1="201" x2="758" y2="285" stroke="#b45309" stroke-width="1" marker-start="url(#arrAmberR)" marker-end="url(#arrAmber)"/>
+            <line data-id="112" x1="754" y1="201" x2="762" y2="201" stroke="#b45309" stroke-width="1"/>
+            <line data-id="113" x1="754" y1="285" x2="762" y2="285" stroke="#b45309" stroke-width="1"/>
+            <text data-id="114" x="766" y="247" fill="#b45309" font-size="9" font-family="Inter" font-weight="600" transform="rotate(90,766,247)" text-anchor="middle">84"</text>
+
+            <!-- Entryway to tree: y=58 x=166→310 -->
+            <line data-id="115" x1="166" y1="58" x2="310" y2="58" stroke="#475569" stroke-width="1" marker-start="url(#arrR)" marker-end="url(#arr)"/>
+            <line data-id="116" x1="166" y1="54" x2="166" y2="62" stroke="#475569" stroke-width="1"/>
+            <line data-id="117" x1="310" y1="54" x2="310" y2="62" stroke="#475569" stroke-width="1"/>
+            <text data-id="118" x="238" y="54" fill="#334155" font-size="9" font-family="Inter" font-weight="700" text-anchor="middle">12 ft (144")</text>
+
+            <!-- ═══ LAYER 4: TREE #2 SAVANNAH HOLLY ═══ -->
+            <circle data-id="119" cx="90" cy="155" r="72" fill="rgba(249,115,22,0.1)" stroke="#f97316" stroke-width="1.2" stroke-dasharray="6 3"/>
+            <circle data-id="120" cx="90" cy="155" r="28" fill="rgba(249,115,22,0.28)"/>
+            <circle data-id="121" cx="90" cy="155" r="5" fill="#92400e"/>
+            <circle data-id="122" cx="72" cy="131" r="11" fill="#f97316"/>
+            <text data-id="123" x="72" y="135" text-anchor="middle" fill="white" font-size="12" font-family="Inter" font-weight="800">②</text>
+            <!-- Savannah Holly label with background -->
+            <rect data-id="124" x="18" y="220" width="144" height="32" rx="4" fill="#1e293b" fill-opacity="0.82"/>
+            <text data-id="125" x="90" y="234" text-anchor="middle" fill="#fb923c" font-size="10" font-family="Inter" font-weight="700">SAVANNAH HOLLY</text>
+            <text data-id="126" x="90" y="248" text-anchor="middle" fill="#fbbf24" font-size="8" font-family="Inter" font-weight="500">CRZ 6ft | 138 sqft ✓</text>
+
+            <!-- ═══ LAYER 5: TREE #3 JAPANESE MAPLE (CORRECTED SLOPE) ═══ -->
+            <circle data-id="127" cx="210" cy="130" r="60" fill="rgba(59,130,246,0.1)" stroke="#3b82f6" stroke-width="1.2" stroke-dasharray="6 3"/>
+            <circle data-id="128" cx="210" cy="130" r="22" fill="rgba(59,130,246,0.28)"/>
+            <circle data-id="129" cx="210" cy="130" r="4" fill="#1e3a5f"/>
+            <circle data-id="130" cx="192" cy="108" r="11" fill="#3b82f6"/>
+            <text data-id="131" x="192" y="112" text-anchor="middle" fill="white" font-size="12" font-family="Inter" font-weight="800">③</text>
+            <!-- Japanese Maple label with dark background — CORRECTED slope data -->
+            <rect data-id="132" x="152" y="62" width="140" height="30" rx="4" fill="#1e293b" fill-opacity="0.82"/>
+            <text data-id="133" x="222" y="76" text-anchor="middle" fill="#60a5fa" font-size="9" font-family="Inter" font-weight="700">JAPANESE MAPLE</text>
+            <text data-id="134" x="222" y="89" text-anchor="middle" fill="#93c5fd" font-size="7.5" font-family="Inter" font-weight="500">CRZ 5ft | 120 sqft ✓ | 196" run 27" rise</text>
+
+            <!-- ═══ LAYER 6: TREE #1 LIVE OAK ═══ -->
+            <!-- Canopy -->
+            <circle data-id="135" cx="310" cy="170" r="90" fill="rgba(21,128,61,0.15)" stroke="#15803d" stroke-width="1.5" stroke-dasharray="6 3"/>
+            <text data-id="136" x="420" y="78" text-anchor="middle" fill="#15803d" font-size="8" font-family="Inter" font-weight="500" font-style="italic">Canopy spread: 65.2 ft — THINNING with active leaf drop</text>
+
+            <!-- CRZ directional lines -->
+            <!-- North → House -->
+            <line data-id="137" x1="310" y1="170" x2="310" y2="52" stroke="#22c55e" stroke-width="1.5" stroke-dasharray="5 3" marker-end="url(#arrGreen)"/>
+            <rect data-id="138" x="318" y="100" width="100" height="12" rx="2" fill="white" fill-opacity="0.92"/>
+            <text data-id="139" x="322" y="110" fill="#22c55e" font-size="8" font-family="Inter" font-weight="600">10ft ⚠ House</text>
+
+            <!-- South → Sidewalk -->
+            <line data-id="140" x1="310" y1="170" x2="310" y2="342" stroke="#22c55e" stroke-width="1.5" stroke-dasharray="5 3" marker-end="url(#arrGreen)"/>
+            <rect data-id="141" x="318" y="318" width="112" height="12" rx="2" fill="white" fill-opacity="0.92"/>
+            <text data-id="142" x="322" y="328" fill="#22c55e" font-size="8" font-family="Inter" font-weight="600">14.5ft Sidewalk</text>
+
+            <!-- West → Entryway -->
+            <line data-id="143" x1="310" y1="170" x2="168" y2="170" stroke="#22c55e" stroke-width="1.5" stroke-dasharray="5 3" marker-end="url(#arrGreen)"/>
+            <rect data-id="144" x="220" y="158" width="86" height="10" rx="2" fill="white" fill-opacity="0.92"/>
+            <text data-id="145" x="224" y="166" fill="#22c55e" font-size="7.5" font-family="Inter" font-weight="600">12ft Entryway</text>
+
+            <!-- East → Neighbor Property (CORRECTED: ~22 ft, ends at x=574) -->
+            <line data-id="146" x1="310" y1="170" x2="574" y2="170" stroke="#22c55e" stroke-width="1.5" stroke-dasharray="5 3" marker-end="url(#arrGreen)"/>
+            <rect data-id="147" x="380" y="158" width="190" height="10" rx="2" fill="white" fill-opacity="0.92"/>
+            <text data-id="148" x="384" y="166" fill="#22c55e" font-size="7.5" font-family="Inter" font-weight="600">~22 ft → Neighbor Property (CONSTRAINED ⚠)</text>
+
+            <!-- Stone border ring -->
+            <circle data-id="149" cx="310" cy="170" r="22" fill="#a8a29e" fill-opacity="0.5" stroke="#6b7280" stroke-width="2"/>
+
+            <!-- Trunk -->
+            <circle data-id="150" cx="310" cy="170" r="9" fill="#78350f"/>
+            <!-- Protection strap -->
+            <rect data-id="151" x="301" y="168" width="18" height="4" rx="1" fill="white" stroke="#ccc" stroke-width="0.5"/>
+
+            <!-- Badge -->
+            <circle data-id="152" cx="287" cy="147" r="13" fill="#22c55e"/>
+            <text data-id="153" x="287" y="152" text-anchor="middle" fill="white" font-size="14" font-family="Inter" font-weight="800">①</text>
+
+            <!-- Live Oak label with dark background - positioned below trunk -->
+            <rect data-id="154" x="236" y="188" width="148" height="12" rx="3" fill="#1e293b" fill-opacity="0.82"/>
+            <text data-id="155" x="310" y="197" text-anchor="middle" fill="#4ade80" font-size="10" font-family="Inter" font-weight="700">LIVE OAK | ~128 yrs | ⚠</text>
+
+            <!-- Primary concern callout box — CORRECTED measurements -->
+            <rect data-id="156" x="542" y="58" width="268" height="140" rx="6" fill="#fef2f2" fill-opacity="0.95" stroke="#dc2626" stroke-width="2"/>
+            <rect data-id="157" x="542" y="48" width="136" height="14" rx="3" fill="#dc2626"/>
+            <text data-id="158" x="610" y="58" text-anchor="middle" fill="white" font-size="8" font-family="Inter" font-weight="700">ANNOTATION OVERLAY</text>
+            <text data-id="159" x="558" y="77" fill="#dc2626" font-size="11" font-family="Inter" font-weight="800">⚠ LIVE OAK — PRIMARY CONCERNS</text>
+            <line data-id="160" x1="558" y1="83" x2="796" y2="83" stroke="#fecaca" stroke-width="1"/>
+            <text data-id="161" x="558" y="100" fill="#991b1b" font-size="10" font-family="Inter" font-weight="600">① MOISTURE DEFICIT</text>
+            <text data-id="162" x="572" y="113" fill="#7f1d1d" font-size="9" font-family="Inter">18.9% slope runoff (wall front → stake)</text>
+            <text data-id="163" x="558" y="130" fill="#991b1b" font-size="10" font-family="Inter" font-weight="600">② PAST GRADE CHANGES</text>
+            <text data-id="164" x="572" y="143" fill="#7f1d1d" font-size="9" font-family="Inter">2020 root damage — 84" fill zone</text>
+            <text data-id="165" x="558" y="160" fill="#991b1b" font-size="10" font-family="Inter" font-weight="600">③ FEEDER ROOT TRAP</text>
+            <text data-id="166" x="572" y="173" fill="#7f1d1d" font-size="9" font-family="Inter">Turf competes for water on slope</text>
+            <!-- Fill zone note -->
+            <text data-id="167" x="558" y="190" fill="#6b21a8" font-size="8" font-family="Inter" font-weight="500" font-style="italic">New soil/compost fill over 84" root zone</text>
+            <!-- Connector -->
+            <line data-id="168" x1="542" y1="123" x2="342" y2="170" stroke="#dc2626" stroke-width="1" stroke-dasharray="4 3" stroke-opacity="0.6"/>
+
+            <!-- ═══ LAYER 7: FIELD MARKERS ═══ -->
+            <!-- Runoff arrows -->
+            <line data-id="169" x1="230" y1="225" x2="230" y2="332" stroke="#2563eb" stroke-width="1.5" stroke-opacity="0.5" marker-end="url(#arrBlue)"/>
+            <line data-id="170" x1="285" y1="225" x2="285" y2="332" stroke="#2563eb" stroke-width="1.5" stroke-opacity="0.5" marker-end="url(#arrBlue)"/>
+            <line data-id="171" x1="345" y1="225" x2="345" y2="332" stroke="#2563eb" stroke-width="1.5" stroke-opacity="0.5" marker-end="url(#arrBlue)"/>
+            <line data-id="172" x1="405" y1="225" x2="405" y2="332" stroke="#2563eb" stroke-width="1.5" stroke-opacity="0.5" marker-end="url(#arrBlue)"/>
+            <text data-id="173" x="420" y="312" fill="#2563eb" font-size="9" font-family="Inter" font-weight="600" fill-opacity="0.7">RUNOFF ▼</text>
+
+            <!-- Utility flags -->
+            <polygon data-id="174" points="256,266 252,278 260,278" fill="#f97316"/>
+            <polygon data-id="175" points="284,279 280,291 288,291" fill="#f97316"/>
+            <polygon data-id="176" points="328,284 324,296 332,296" fill="#f97316"/>
+            <polygon data-id="177" points="362,271 358,283 366,283" fill="#f97316"/>
+            <rect data-id="178" x="370" y="291" width="108" height="12" rx="2" fill="white" fill-opacity="0.9"/>
+            <text data-id="179" x="424" y="300" text-anchor="middle" fill="#ea580c" font-size="8" font-family="Inter" font-weight="600">▲ Utility flags (field)</text>
+
+            <!-- Photo callouts -->
+            <rect data-id="180" x="540" y="300" width="210" height="20" rx="4" fill="white" fill-opacity="0.92" stroke="#94a3b8" stroke-width="0.5"/>
+            <text data-id="181" x="548" y="309" fill="#64748b" font-size="8" font-family="Inter">📷</text>
+            <text data-id="182" x="562" y="309" fill="#475569" font-size="9" font-family="Inter" font-weight="500">2002–03: original wall established</text>
+            <text data-id="183" x="562" y="318" fill="#475569" font-size="7" font-family="Inter">Stone border placed around Live Oak</text>
+
+            <rect data-id="184" x="630" y="196" width="68" height="12" rx="2" fill="white" fill-opacity="0.88"/>
+            <text data-id="185" x="634" y="205" fill="#dc2626" font-size="8" font-family="Inter" font-weight="600">📷 2020</text>
+
+            <!-- ═══ LAYER 8: EXTRAS ═══ -->
+            <!-- Compass rose -->
+            <g data-id="186" transform="translate(28,80)">
+                <circle data-id="187" cx="0" cy="0" r="20" fill="white" fill-opacity="0.92" stroke="#94a3b8" stroke-width="1"/>
+                <line data-id="188" x1="0" y1="-14" x2="0" y2="14" stroke="#94a3b8" stroke-width="1"/>
+                <line data-id="189" x1="-14" y1="0" x2="14" y2="0" stroke="#94a3b8" stroke-width="1"/>
+                <polygon data-id="190" points="0,-14 -3,-5 3,-5" fill="#dc2626"/>
+                <polygon data-id="191" points="0,14 -3,5 3,5" fill="#94a3b8"/>
+                <text data-id="192" x="0" y="-18" text-anchor="middle" fill="#dc2626" font-size="10" font-family="Inter" font-weight="800">N</text>
+                <text data-id="193" x="0" y="26" text-anchor="middle" fill="#64748b" font-size="7" font-family="Inter">S</text>
+                <text data-id="194" x="22" y="3" text-anchor="middle" fill="#64748b" font-size="7" font-family="Inter">E</text>
+                <text data-id="195" x="-22" y="3" text-anchor="middle" fill="#64748b" font-size="7" font-family="Inter">W</text>
+            </g>
+
+            <!-- Scale bar -->
+            <g data-id="196" transform="translate(70,510)">
+                <text data-id="197" x="0" y="-4" fill="#334155" font-size="9" font-family="Inter" font-weight="600">Scale: 1 px = 1 inch | 12 px = 1 foot</text>
+                <line data-id="198" x1="0" y1="6" x2="120" y2="6" stroke="#475569" stroke-width="1.5"/>
+                <line data-id="199" x1="0" y1="2" x2="0" y2="10" stroke="#475569" stroke-width="1.5"/>
+                <line data-id="200" x1="24" y1="3" x2="24" y2="9" stroke="#475569" stroke-width="1"/>
+                <line data-id="201" x1="48" y1="2" x2="48" y2="10" stroke="#475569" stroke-width="1.5"/>
+                <line data-id="202" x1="72" y1="3" x2="72" y2="9" stroke="#475569" stroke-width="1"/>
+                <line data-id="203" x1="96" y1="2" x2="96" y2="10" stroke="#475569" stroke-width="1.5"/>
+                <line data-id="204" x1="120" y1="2" x2="120" y2="10" stroke="#475569" stroke-width="1.5"/>
+                <text data-id="205" x="0" y="20" text-anchor="middle" fill="#64748b" font-size="7" font-family="Inter">0</text>
+                <text data-id="206" x="24" y="20" text-anchor="middle" fill="#64748b" font-size="7" font-family="Inter">24"</text>
+                <text data-id="207" x="48" y="20" text-anchor="middle" fill="#64748b" font-size="7" font-family="Inter">48"</text>
+                <text data-id="208" x="72" y="20" text-anchor="middle" fill="#64748b" font-size="7" font-family="Inter">72"</text>
+                <text data-id="209" x="96" y="20" text-anchor="middle" fill="#64748b" font-size="7" font-family="Inter">96"</text>
+                <text data-id="210" x="120" y="20" text-anchor="middle" fill="#64748b" font-size="7" font-family="Inter">120"</text>
+            </g>
+
+            <!-- Document info -->
+            <text data-id="211" x="810" y="508" text-anchor="end" fill="#64748b" font-size="8" font-family="Inter">Prepared: September 2026 | McKinney, TX</text>
+            <text data-id="212" x="810" y="520" text-anchor="end" fill="#94a3b8" font-size="7" font-family="Inter">Olson Property — Residential Assessment</text>
+
+            <!-- ═══ CLICKABLE TREE HIT AREAS ═══ -->
+            <g data-id="213" class="tree-hit" data-tree="1"><circle data-id="214" cx="310" cy="170" r="30" fill="transparent"/></g>
+            <g data-id="215" class="tree-hit" data-tree="2"><circle data-id="216" cx="90" cy="155" r="35" fill="transparent"/></g>
+            <g data-id="217" class="tree-hit" data-tree="3"><circle data-id="218" cx="210" cy="130" r="30" fill="transparent"/></g>
+        </svg>
+    </div>
+
+    <!-- ═══════════════ TAB 2: 2020 TIMELINE ═══════════════ -->
+    <div data-id="219" id="view-timeline" class="tab-content pt-12 h-screen w-screen overflow-auto" style="background:#0f172a;">
+        <div data-id="220" id="timeline-hdr-m1n2" class="px-6 py-4 border-b border-base-700 shrink-0">
+            <h2 data-id="221" id="tl-title-o3p4" class="text-lg font-bold text-white">Construction &amp; Assessment Timeline</h2>
+            <p data-id="222" class="text-xs text-base-400 mt-1">Key events affecting the Live Oak's root zone</p>
+        </div>
+        <div data-id="223" id="timeline-body-q5r6" class="flex-1 overflow-y-auto p-6 space-y-3 max-w-3xl mx-auto">
+            <!-- Card 1 -->
+            <div data-id="224" id="tl-card1-s7t8" class="bg-base-800 border-l-4 border-base-500 rounded-lg p-4">
+                <div data-id="225" class="flex items-center gap-2 mb-2">
+                    <span data-id="226" class="text-xs font-bold text-base-400 uppercase tracking-wider">2002–2003</span>
+                    <span data-id="227" class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-base-700 text-base-300">Baseline</span>
+                </div>
+                <h4 data-id="228" class="text-sm font-bold text-white mb-1">Stone Border &amp; Original Wall Established</h4>
+                <p data-id="229" class="text-xs text-base-400 leading-relaxed">Stone border established around Live Oak. Original retaining wall ~115" from trunk and 59" from sidewalk. Tree condition: Good. Baseline documented with photos.</p>
+            </div>
+            <!-- Card 2 -->
+            <div data-id="230" id="tl-card2-u9v0" class="bg-base-800 border-l-4 border-base-500 rounded-lg p-4">
+                <div data-id="231" class="flex items-center gap-2 mb-2">
+                    <span data-id="232" class="text-xs font-bold text-base-400 uppercase tracking-wider">Pre-2020</span>
+                    <span data-id="233" class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-base-700 text-base-300">Stable</span>
+                </div>
+                <h4 data-id="234" class="text-sm font-bold text-white mb-1">Stable Condition — CRZ Constrained</h4>
+                <p data-id="235" class="text-xs text-base-400 leading-relaxed">Live Oak ~125 yrs. Co-dominant stems. CRZ constrained: house (10ft rear), entryway (12ft left), sidewalk (14.5ft front). Right side ~22ft to neighbor property line — constrained within 50ft CRZ radius.</p>
+            </div>
+            <!-- Card 3 -->
+            <div data-id="236" id="tl-card3-w1x2" class="bg-base-800 border-l-4 border-warn-600 rounded-lg p-4">
+                <div data-id="237" class="flex items-center gap-2 mb-2">
+                    <span data-id="238" class="text-xs font-bold text-warn-500 uppercase tracking-wider">2020 — Construction</span>
+                    <span data-id="239" class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-warn-700/30 text-warn-400">Expansion</span>
+                </div>
+                <h4 data-id="240" class="text-sm font-bold text-warn-400 mb-1">Landscaping Renovation Begins</h4>
+                <p data-id="241" class="text-xs text-base-400 leading-relaxed">Landscaping renovation begins. Utility lines flagged. New planting bed expansion planned in front of Live Oak.</p>
+            </div>
+            <!-- Card 4 — CORRECTED -->
+            <div data-id="242" id="tl-card4-y3z4" class="bg-base-800 border-l-4 border-danger-600 rounded-lg p-4">
+                <div data-id="243" class="flex items-center gap-2 mb-2">
+                    <span data-id="244" class="text-xs font-bold text-danger-500 uppercase tracking-wider">2020 — NEW WALL</span>
+                    <span data-id="245" class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-danger-700/30 text-danger-500">CRITICAL</span>
+                </div>
+                <h4 data-id="246" class="text-sm font-bold text-danger-500 mb-1">New Retaining Wall — 84" from Root Flare</h4>
+                <p data-id="247" class="text-xs text-base-400 leading-relaxed">CRITICAL: New stone retaining wall installed 84" from the Live Oak root flare. New soil/compost fill placed over 84" zone in front of Live Oak following 2020 construction. Excavation and fill within CRZ. Direct root zone impact documented. The 143" slope run begins at the retaining wall front and extends to the stake/sidewalk area (27" rise, 18.9% grade).</p>
+            </div>
+            <!-- Card 5 — CORRECTED -->
+            <div data-id="248" id="tl-card5-a5b6" class="bg-base-800 border-l-4 border-warn-600 rounded-lg p-4">
+                <div data-id="249" class="flex items-center gap-2 mb-2">
+                    <span data-id="250" class="text-xs font-bold text-warn-500 uppercase tracking-wider">2020 — Post-Construction</span>
+                    <span data-id="251" class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-warn-700/30 text-warn-400">Stressors</span>
+                </div>
+                <h4 data-id="252" class="text-sm font-bold text-warn-400 mb-1">Three Chronic Stressors Activated</h4>
+                <p data-id="253" class="text-xs text-base-400 leading-relaxed">Slope created: 143" run (from retaining wall front → stake), 27" rise = 18.9% grade. New soil/compost fill placed over 84" zone between root flare and retaining wall front. Dense turfgrass established on slope. Three chronic stressors now active: moisture deficit, root damage, feeder root trap.</p>
+            </div>
+            <!-- Card 6 -->
+            <div data-id="254" id="tl-card6-c7d8" class="bg-base-800 border-l-4 border-leaf-600 rounded-lg p-4">
+                <div data-id="255" class="flex items-center gap-2 mb-2">
+                    <span data-id="256" class="text-xs font-bold text-leaf-500 uppercase tracking-wider">September 2026</span>
+                    <span data-id="257" class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-leaf-800/30 text-leaf-500">Assessment</span>
+                </div>
+                <h4 data-id="258" class="text-sm font-bold text-leaf-500 mb-1">Arborist Assessment — Treatment Plan</h4>
+                <p data-id="259" class="text-xs text-base-400 leading-relaxed">Canopy thinning and active leaf drop observed. Root zone moisture deficit confirmed. Phase 1 treatment plan: wetting agent → AirSpade → deep root injections.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════ TAB 3: CONCERNS & TREATMENT ═══════════════ -->
+    <div data-id="260" id="view-concerns" class="tab-content pt-12 h-screen w-screen overflow-auto" style="background:#0f172a;">
+        <div data-id="261" id="concerns-wrap-e9f0" class="max-w-3xl mx-auto p-6 space-y-4">
+            <div data-id="262" class="mb-4">
+                <h2 data-id="263" id="concerns-title-g1h2" class="text-xl font-bold text-white">Primary Concerns — Live Oak (Tree #1)</h2>
+                <p data-id="264" class="text-sm text-base-400 mt-1">Quercus virginiana · ~128 years · 50" circumference · CRZ radius: 50 ft</p>
+                <p data-id="265" class="text-xs text-base-500 mt-1">Click each card to expand full assessment detail.</p>
+            </div>
+
+            <!-- Concern 1 — CORRECTED -->
+            <div data-id="266" id="concern1-i3j4" class="concern-acc bg-base-800 rounded-xl p-5 border-l-4 border-water-600">
+                <div data-id="267" class="flex items-center justify-between">
+                    <div data-id="268" class="flex items-center gap-3">
+                        <div data-id="269" class="w-10 h-10 rounded-lg flex items-center justify-center bg-water-700/20">
+                            <i data-id="270" data-lucide="droplets" class="w-5 h-5 text-water-400"></i>
+                        </div>
+                        <div data-id="271">
+                            <h3 data-id="272" class="font-bold text-white">① Moisture Deficit</h3>
+                            <p data-id="273" class="text-xs text-base-400">18.9% slope runoff (wall front → stake) — drought stress</p>
+                        </div>
+                    </div>
+                    <i data-id="274" data-lucide="chevron-down" class="w-5 h-5 text-base-500 chev"></i>
+                </div>
+                <div data-id="275" class="acc-body">
+                    <p data-id="276" class="text-sm text-base-300 leading-relaxed mt-4 pt-4 border-t border-base-700">An 18.9% slope causes rainfall to drain too quickly for Live Oak roots to absorb. Every rain event leaves the tree functionally drought-stressed. The slope (143" horizontal run from retaining wall front → stake, 27" vertical rise) was created by the 2020 retaining wall construction. Dense turfgrass on the slope consumes what little moisture remains before it reaches tree roots. Additionally, new soil/compost fill was placed over the 84" zone between the root flare and retaining wall front, further altering drainage.</p>
+                    <div data-id="277" class="mt-3 p-3 rounded-lg text-xs bg-water-700/15 text-water-400">
+                        <strong data-id="278">Key metric:</strong> 27" rise ÷ 143" run (wall front → stake) × 100 = 18.9% grade (≈ 1:5.3 ratio)
+                    </div>
+                </div>
+            </div>
+
+            <!-- Concern 2 — CORRECTED -->
+            <div data-id="279" id="concern2-k5l6" class="concern-acc bg-base-800 rounded-xl p-5 border-l-4 border-warn-600">
+                <div data-id="280" class="flex items-center justify-between">
+                    <div data-id="281" class="flex items-center gap-3">
+                        <div data-id="282" class="w-10 h-10 rounded-lg flex items-center justify-center bg-warn-700/20">
+                            <i data-id="283" data-lucide="shovel" class="w-5 h-5 text-warn-500"></i>
+                        </div>
+                        <div data-id="284">
+                            <h3 data-id="285" class="font-bold text-white">② Past Grade Changes</h3>
+                            <p data-id="286" class="text-xs text-base-400">2020 root damage — 84" (root flare → retaining wall front)</p>
+                        </div>
+                    </div>
+                    <i data-id="287" data-lucide="chevron-down" class="w-5 h-5 text-base-500 chev"></i>
+                </div>
+                <div data-id="288" class="acc-body">
+                    <p data-id="289" class="text-sm text-base-300 leading-relaxed mt-4 pt-4 border-t border-base-700">The 2020 retaining wall was placed 84" from the Live Oak root flare. New soil/compost fill was placed over this 84" zone in front of the Live Oak following 2020 construction, likely smothering critical lateral feeder roots. Excavation for the new wall footing within the CRZ caused additional root damage. Field photos from 2002/2003 vs. 2020 confirm the dramatic change in wall proximity. The 143" slope (retaining wall front → stake) begins at the face of the new wall.</p>
+                    <div data-id="290" class="mt-3 p-3 rounded-lg text-xs bg-warn-700/15 text-warn-500">
+                        <strong data-id="291">Key metric:</strong> 84" from root flare → retaining wall front (new soil/compost fill zone). 143" from wall front → stake (slope run, 27" rise).
+                    </div>
+                </div>
+            </div>
+
+            <!-- Concern 3 -->
+            <div data-id="292" id="concern3-m7n8" class="concern-acc bg-base-800 rounded-xl p-5 border-l-4 border-leaf-600">
+                <div data-id="293" class="flex items-center justify-between">
+                    <div data-id="294" class="flex items-center gap-3">
+                        <div data-id="295" class="w-10 h-10 rounded-lg flex items-center justify-center bg-leaf-800/20">
+                            <i data-id="296" data-lucide="leaf" class="w-5 h-5 text-leaf-500"></i>
+                        </div>
+                        <div data-id="297">
+                            <h3 data-id="298" class="font-bold text-white">③ Feeder Root Trap</h3>
+                            <p data-id="299" class="text-xs text-base-400">Turf competes for water on slope</p>
+                        </div>
+                    </div>
+                    <i data-id="300" data-lucide="chevron-down" class="w-5 h-5 text-base-500 chev"></i>
+                </div>
+                <div data-id="301" class="acc-body">
+                    <p data-id="302" class="text-sm text-base-300 leading-relaxed mt-4 pt-4 border-t border-base-700">Roots that survived or grew outward past the 2020 retaining wall are now covered by dense turfgrass on an 18.9% slope (143" run from wall front → stake, 27" rise). Turfgrass root systems aggressively intercept soil moisture and nutrients in the upper soil profile. Combined with slope-driven runoff, this creates a chronic and worsening moisture and nutrient deficit in the Live Oak's most accessible root zone.</p>
+                    <div data-id="303" class="mt-3 p-3 rounded-lg text-xs bg-leaf-800/15 text-leaf-500">
+                        <strong data-id="304">Key insight:</strong> Turf root systems consume moisture before it reaches Live Oak feeder roots at depth
+                    </div>
+                </div>
+            </div>
+
+            <!-- Phase 1 Treatment Plan -->
+            <div data-id="305" class="mt-8 mb-2">
+                <h2 data-id="306" id="tx-title-o9p0" class="text-lg font-bold text-white flex items-center gap-2">
+                    <i data-id="307" data-lucide="clipboard-check" class="w-5 h-5 text-leaf-500"></i>
+                    Phase 1 Treatment Plan
+                </h2>
+                <p data-id="308" class="text-xs text-base-400 mt-1">Sequential remediation protocol for Live Oak root zone recovery</p>
+            </div>
+
+            <!-- Treatment 1 — CORRECTED -->
+            <div data-id="309" id="tx1-q1r2" class="bg-base-800 border border-water-700/40 rounded-xl p-5">
+                <div data-id="310" class="flex items-center gap-3 mb-2">
+                    <div data-id="311" class="w-8 h-8 rounded-lg flex items-center justify-center bg-water-700/20 text-water-400 font-bold text-sm">1</div>
+                    <h3 data-id="312" class="font-bold text-water-400">Soil Wetting Agent (Surfactant)</h3>
+                </div>
+                <p data-id="313" class="text-sm text-base-300 leading-relaxed">Apply penetrant surfactant solution to entire slope zone (143" run from retaining wall front → stake). Breaks hydrophobic surface tension in compacted soil. Dramatically improves water infiltration from rainfall and irrigation. Reduces the effective slope runoff rate on the 18.9% grade.</p>
+            </div>
+
+            <!-- Treatment 2 — CORRECTED -->
+            <div data-id="314" id="tx2-s3t4" class="bg-base-800 border border-warn-700/40 rounded-xl p-5">
+                <div data-id="315" class="flex items-center gap-3 mb-2">
+                    <div data-id="316" class="w-8 h-8 rounded-lg flex items-center justify-center bg-warn-700/20 text-warn-500 font-bold text-sm">2</div>
+                    <h3 data-id="317" class="font-bold text-warn-500">AirSpade Root Zone Excavation</h3>
+                </div>
+                <p data-id="318" class="text-sm text-base-300 leading-relaxed">Pneumatic soil excavation using compressed-air tool in the CRZ. Decompresses soil, removes smothered fill material from 2020 construction zone (84" root flare → retaining wall front, where new soil/compost fill was placed). Allows direct visual assessment of root damage and surviving root architecture. Prepares zone for amendment.</p>
+            </div>
+
+            <!-- Treatment 3 -->
+            <div data-id="319" id="tx3-u5v6" class="bg-base-800 border border-leaf-700/40 rounded-xl p-5">
+                <div data-id="320" class="flex items-center gap-3 mb-2">
+                    <div data-id="321" class="w-8 h-8 rounded-lg flex items-center justify-center bg-leaf-800/20 text-leaf-500 font-bold text-sm">3</div>
+                    <h3 data-id="322" class="font-bold text-leaf-500">Deep Root Soil Injections</h3>
+                </div>
+                <p data-id="323" class="text-sm text-base-300 leading-relaxed">High-pressure injection of liquid fertilizer, humic acids, bioactive amendments, and mycorrhizal inoculants directly into the root zone at 18–24" depth. Bypasses the competitive turfgrass root system entirely. Delivers critical nutrition and beneficial biology directly to Live Oak feeder roots.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════ TAB 4: LEGEND ═══════════════ -->
+    <div data-id="324" id="view-legend" class="tab-content pt-12 h-screen w-screen overflow-auto" style="background:#0f172a;">
+        <div data-id="325" id="legend-wrap-w7x8" class="max-w-3xl mx-auto p-6">
+            <h2 data-id="326" id="legend-title-y9z0" class="text-lg font-bold text-white mb-6">Diagram Legend</h2>
+            <div data-id="327" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <!-- Trees -->
+                <div data-id="328" class="bg-base-800 rounded-xl p-4 space-y-3">
+                    <h3 data-id="329" class="text-xs font-bold text-base-400 uppercase tracking-wider mb-2">Trees</h3>
+                    <div data-id="330" class="flex items-center gap-3"><span data-id="331" class="w-4 h-4 rounded-full bg-leaf-500 shrink-0"></span><span data-id="332" class="text-sm text-base-300">① Live Oak — Primary Assessment</span></div>
+                    <div data-id="333" class="flex items-center gap-3"><span data-id="334" class="w-4 h-4 rounded-full bg-holly-500 shrink-0"></span><span data-id="335" class="text-sm text-base-300">② Savannah Holly</span></div>
+                    <div data-id="336" class="flex items-center gap-3"><span data-id="337" class="w-4 h-4 rounded-full bg-water-500 shrink-0"></span><span data-id="338" class="text-sm text-base-300">③ Japanese Maple — Slope: 196" run, 27" rise</span></div>
+                </div>
+                <!-- Structures -->
+                <div data-id="339" class="bg-base-800 rounded-xl p-4 space-y-3">
+                    <h3 data-id="340" class="text-xs font-bold text-base-400 uppercase tracking-wider mb-2">Structures</h3>
+                    <div data-id="341" class="flex items-center gap-3">
+                        <svg data-id="342" width="28" height="10"><line data-id="343" x1="0" y1="5" x2="28" y2="5" stroke="#1e293b" stroke-width="5"/></svg>
+                        <span data-id="344" class="text-sm text-base-300">2020 Retaining Wall</span>
+                    </div>
+                    <div data-id="345" class="flex items-center gap-3">
+                        <svg data-id="346" width="28" height="10"><line data-id="347" x1="0" y1="5" x2="28" y2="5" stroke="#64748b" stroke-width="2.5" stroke-dasharray="6 3"/></svg>
+                        <span data-id="348" class="text-sm text-base-300">Original Wall (pre-2020)</span>
+                    </div>
+                    <div data-id="349" class="flex items-center gap-3">
+                        <svg data-id="350" width="28" height="10"><line data-id="351" x1="0" y1="5" x2="28" y2="5" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="8 4"/></svg>
+                        <span data-id="352" class="text-sm text-base-300">Neighbor Property Line</span>
+                    </div>
+                </div>
+                <!-- Zones -->
+                <div data-id="353" class="bg-base-800 rounded-xl p-4 space-y-3">
+                    <h3 data-id="354" class="text-xs font-bold text-base-400 uppercase tracking-wider mb-2">Zones</h3>
+                    <div data-id="355" class="flex items-center gap-3">
+                        <svg data-id="356" width="28" height="14"><rect data-id="357" x="0" y="0" width="28" height="14" fill="#92400e" fill-opacity="0.25" rx="2"/><line data-id="358" x1="4" y1="0" x2="14" y2="14" stroke="#92400e" stroke-width="1" stroke-opacity="0.5"/><line data-id="359" x1="12" y1="0" x2="22" y2="14" stroke="#92400e" stroke-width="1" stroke-opacity="0.5"/><line data-id="360" x1="20" y1="0" x2="28" y2="10" stroke="#92400e" stroke-width="1" stroke-opacity="0.5"/></svg>
+                        <span data-id="361" class="text-sm text-base-300">Slope zone — 143" run (wall front → stake), 27" rise, 18.9%</span>
+                    </div>
+                    <div data-id="362" class="flex items-center gap-3">
+                        <svg data-id="363" width="28" height="14"><rect data-id="364" x="0" y="0" width="28" height="14" fill="#7c3aed" fill-opacity="0.2" stroke="#7c3aed" stroke-width="1" stroke-dasharray="3 2" rx="2"/></svg>
+                        <span data-id="365" class="text-sm text-base-300">84" fill zone (root flare → wall front) — new soil/compost</span>
+                    </div>
+                    <div data-id="366" class="flex items-center gap-3">
+                        <svg data-id="367" width="28" height="14"><rect data-id="368" x="0" y="0" width="28" height="14" fill="#fbbf24" fill-opacity="0.25" stroke="#d97706" stroke-width="1" stroke-dasharray="3 2" rx="2"/></svg>
+                        <span data-id="369" class="text-sm text-base-300">84" expansion zone (original wall offset)</span>
+                    </div>
+                    <div data-id="370" class="flex items-center gap-3">
+                        <svg data-id="371" width="28" height="10"><line data-id="372" x1="0" y1="5" x2="28" y2="5" stroke="#22c55e" stroke-width="1.5" stroke-dasharray="5 3"/></svg>
+                        <span data-id="373" class="text-sm text-base-300">CRZ directional constraint</span>
+                    </div>
+                </div>
+                <!-- Markers -->
+                <div data-id="374" class="bg-base-800 rounded-xl p-4 space-y-3">
+                    <h3 data-id="375" class="text-xs font-bold text-base-400 uppercase tracking-wider mb-2">Markers</h3>
+                    <div data-id="376" class="flex items-center gap-3">
+                        <svg data-id="377" width="28" height="14"><line data-id="378" x1="14" y1="0" x2="14" y2="14" stroke="#2563eb" stroke-width="1.5"/><polygon data-id="379" points="14,14 11,8 17,8" fill="#2563eb"/></svg>
+                        <span data-id="380" class="text-sm text-base-300">Runoff direction</span>
+                    </div>
+                    <div data-id="381" class="flex items-center gap-3">
+                        <svg data-id="382" width="28" height="14"><polygon data-id="383" points="14,2 10,14 18,14" fill="#f97316"/></svg>
+                        <span data-id="384" class="text-sm text-base-300">Field utility flag</span>
+                    </div>
+                    <div data-id="385" class="flex items-center gap-3">
+                        <svg data-id="386" width="28" height="14"><rect data-id="387" x="1" y="1" width="26" height="12" rx="2" fill="#fef2f2" stroke="#dc2626" stroke-width="1.5"/></svg>
+                        <span data-id="388" class="text-sm text-base-300">Primary concern callout</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══ TREE DETAIL SLIDE PANEL ═══ -->
+    <div data-id="389" id="tree-panel-a1b1" class="slide-panel no-print">
+        <div data-id="390" id="panel-hdr-c2d2" class="sticky top-0 bg-white border-b border-gray-100 px-5 py-3 flex items-center justify-between z-10">
+            <h2 data-id="391" id="panel-title-e3f3" class="text-base font-bold text-gray-900"></h2>
+            <button data-id="392" id="panel-close-g4h4" class="p-1.5 rounded-lg hover:bg-gray-100 text-gray-400 hover:text-gray-700 transition-colors">
+                <i data-id="393" data-lucide="x" class="w-5 h-5"></i>
+            </button>
+        </div>
+        <div data-id="394" id="panel-body-i5j5" class="p-5 space-y-4 text-sm"></div>
+    </div>
+
+    <!-- ═══ TOOLTIP ═══ -->
+    <div data-id="395" id="tooltip-k6l6" class="fixed bg-white border border-gray-200 rounded-xl px-3 py-2 text-xs pointer-events-none z-[100] shadow-lg max-w-[260px] hidden" style="color:#1e293b;"></div>
+
+    <!-- ═══ FOOTER ═══ -->
+    <footer data-id="396" id="footer-m7n7" class="fixed bottom-0 left-0 right-0 h-6 bg-base-950 border-t border-base-700 flex items-center justify-center no-print z-30">
+        <p data-id="397" class="text-[10px] text-base-500">Made by Copilot</p>
+    </footer>
+
+    <script>
+        // ═══ GUARD LUCIDE ═══
+        if (typeof lucide !== "undefined" && typeof lucide.createIcons === "function") {
+            lucide.createIcons();
+        }
+
+        // ═══ TREE DATA — CORRECTED ═══
+        var TREES = [
+            {
+                id:1, badge:"①", color:"#22c55e",
+                name:"Live Oak", sci:"Quercus virginiana",
+                circ:'50" (at 34" from grade, below co-dominant union)',
+                stems:'Left stem: 28" circ. | Right stem: 32.5" circ. (above union)',
+                height:"50.5 ft", canopy:"65.2 ft — currently THINNING with active leaf drop",
+                crzRadius:"50 ft", crzISA:"~7,854 sq ft",
+                crzAvail:"Constrained on all 4 sides — see CRZ Field Constraints below",
+                age:"~128 years", condition:"Fair — canopy thinning, active leaf drop (2020 root zone disturbance)",
+                svgX:310, svgY:170,
+                constraints:["REAR: 10 ft → House Foundation ⚠ CONSTRAINED","FRONT: 14.5 ft → Sidewalk — CONSTRAINED","LEFT: 12 ft → Entryway Pavement — CONSTRAINED","RIGHT: ~22 ft → Neighbor Property ⚠ CONSTRAINED (within 50 ft CRZ radius)"],
+                wallNote:'84" from root flare → retaining wall front. New soil/compost fill placed over 84" zone in front of Live Oak following 2020 construction.',
+                slope:'Slope: 143" run (retaining wall front → stake) | 27" rise | Grade: 18.9%',
+                concerns:[
+                    {title:"MOISTURE DEFICIT",detail:'An 18.9% slope causes rainfall to drain too quickly for Live Oak roots to absorb. Every rain event leaves the tree functionally drought-stressed. The slope (143" horizontal run from retaining wall front → stake, 27" vertical rise) was created by the 2020 retaining wall construction. Dense turfgrass on the slope consumes what little moisture remains before it reaches tree roots. New soil/compost fill placed over 84" zone in front of Live Oak following 2020 construction further altered drainage.'},
+                    {title:"PAST GRADE CHANGES",detail:'The 2020 retaining wall was placed 84" from the Live Oak root flare. New soil/compost fill was placed over the 84" zone in front of Live Oak following 2020 construction, likely smothering critical lateral feeder roots. The 143" slope run begins at the retaining wall front and extends to the stake/sidewalk area (27" rise, 18.9% grade). Field photos from 2002/2003 vs. 2020 confirm the dramatic change in wall proximity. This represents a direct, documented encroachment into the protected CRZ.'},
+                    {title:"FEEDER ROOT TRAP",detail:'Roots that survived or grew outward past the 2020 retaining wall are now covered by dense turfgrass on an 18.9% slope (143" run from wall front → stake, 27" rise). Turfgrass root systems aggressively intercept soil moisture and nutrients in the upper soil profile. Combined with slope-driven runoff, this creates a chronic and worsening moisture and nutrient deficit in the Live Oak\'s most accessible root zone.'}
+                ],
+                treatment:[
+                    {step:"1",method:"Soil Wetting Agent (Surfactant)",desc:"Apply penetrant surfactant solution to entire slope zone (143\" run from retaining wall front → stake). Breaks hydrophobic surface tension in compacted soil. Dramatically improves water infiltration from rainfall and irrigation. Reduces the effective slope runoff rate on the 18.9% grade."},
+                    {step:"2",method:"AirSpade Root Zone Excavation",desc:"Pneumatic soil excavation using compressed-air tool in the CRZ. Decompresses soil, removes smothered fill material from 2020 construction zone (84\" root flare → retaining wall front, where new soil/compost fill was placed). Allows direct visual assessment of root damage and surviving root architecture. Prepares zone for amendment."},
+                    {step:"3",method:"Deep Root Soil Injections",desc:"High-pressure injection of liquid fertilizer, humic acids, bioactive amendments, and mycorrhizal inoculants directly into the root zone at 18–24\" depth. Bypasses the competitive turfgrass root system entirely. Delivers critical nutrition and beneficial biology directly to Live Oak feeder roots."}
+                ]
+            },
+            {
+                id:2, badge:"②", color:"#f97316",
+                name:"Savannah Holly", sci:"Ilex × attenuata 'Savannah'",
+                circ:'Multi-stem: 6.5"', stems:"Multi-stem form",
+                height:"25 ft", canopy:"19 ft spread",
+                crzRadius:"6 ft", crzISA:'~113 sq ft (ISA standard, 6" primary stem)',
+                crzAvail:"11.5 ft × 12 ft = 138 sq ft — SUFFICIENT ✓",
+                age:"13 years", condition:"Good",
+                svgX:90, svgY:155,
+                constraints:[],
+                wallNote:"No documented retaining wall impact",
+                slope:"Not in slope zone",
+                concerns:[{title:"MONITORING ONLY",detail:"No active concerns at time of assessment. Available CRZ (138 sq ft) exceeds ISA minimum requirement (113 sq ft). SPECIAL NOTE: Spatial encroachment by neighboring Live Oak root system is present — monitor for competitive root pressure and moisture competition annually."}],
+                treatment:[{step:"1",method:"Annual Monitoring",desc:"Re-assess CRZ, canopy health, and Live Oak root competition annually. No active treatment required at this time."}]
+            },
+            {
+                id:3, badge:"③", color:"#3b82f6",
+                name:"Japanese Maple", sci:"Acer palmatum",
+                circ:'~5"', stems:"Single leader",
+                height:"17 ft", canopy:"12 ft spread",
+                crzRadius:"5 ft", crzISA:'~78.5 sq ft (ISA standard, ~5" DBH)',
+                crzAvail:"10 ft × 12 ft = 120 sq ft — SUFFICIENT ✓",
+                age:"15 years", condition:"Good",
+                svgX:210, svgY:130,
+                constraints:[],
+                wallNote:"No documented retaining wall impact",
+                slope:"CRZ slope: 196\" run (house → sidewalk area), 27\" rise",
+                concerns:[{title:"MONITORING ONLY",detail:"No active concerns at time of assessment. Available CRZ (120 sq ft) exceeds ISA minimum requirement (78.5 sq ft). CRZ slope measurement: 196\" run (house → sidewalk area), 27\" rise. Available root zone is adequate for current tree size."}],
+                treatment:[{step:"1",method:"Annual Monitoring",desc:"Re-assess CRZ and canopy health annually. No active treatment required at this time."}]
+            }
+        ];
+
+        // ═══ TAB SWITCHING ═══
+        var tabMap = {
+            'tab-diagram': 'view-diagram',
+            'tab-timeline': 'view-timeline',
+            'tab-concerns': 'view-concerns',
+            'tab-legend': 'view-legend'
+        };
+        var tabBtns = document.querySelectorAll('.tab-btn');
+        function switchTab(activeId) {
+            tabBtns.forEach(function(btn) {
+                if (btn.id === activeId) {
+                    btn.className = 'tab-btn px-3 py-1.5 text-sm font-medium rounded-md bg-green-700 text-white flex items-center gap-1';
+                } else {
+                    btn.className = 'tab-btn px-3 py-1.5 text-sm font-medium rounded-md bg-base-700 text-base-300 hover:bg-base-600 flex items-center gap-1';
+                }
+            });
+            Object.keys(tabMap).forEach(function(key) {
+                var el = document.getElementById(tabMap[key]);
+                if (el) { el.classList.toggle('active', key === activeId); }
+            });
+            document.getElementById('tree-panel-a1b1').classList.remove('open');
+        }
+        tabBtns.forEach(function(btn) {
+            if (tabMap[btn.id]) {
+                btn.addEventListener('click', function() { switchTab(btn.id); });
+            }
+        });
+
+        // ═══ TREE DETAIL PANEL ═══
+        var panel = document.getElementById('tree-panel-a1b1');
+        var panelTitle = document.getElementById('panel-title-e3f3');
+        var panelBody = document.getElementById('panel-body-i5j5');
+
+        function openTreePanel(treeId) {
+            var t = TREES.find(function(tr) { return tr.id === treeId; });
+            if (!t) return;
+
+            panelTitle.textContent = t.badge + ' ' + t.name;
+            panelTitle.style.color = t.color;
+
+            var h = '';
+            // Scientific name
+            h += '<p class="text-sm text-gray-500 italic">' + t.sci + '</p>';
+
+            // Data table
+            var rows = [
+                ['Circumference', t.circ],
+                ['Stem Structure', t.stems],
+                ['Height', t.height],
+                ['Canopy Spread', t.canopy],
+                ['CRZ Radius Required', t.crzRadius],
+                ['Available CRZ Area', t.crzAvail],
+                ['Estimated Age', t.age],
+                ['Condition', t.condition],
+                ['CRZ Slope', t.slope]
+            ];
+            h += '<div class="space-y-0">';
+            rows.forEach(function(r, i) {
+                var bg = i % 2 === 0 ? 'bg-gray-50' : 'bg-white';
+                h += '<div class="flex justify-between items-start gap-2 ' + bg + ' px-3 py-2 text-xs border-b border-gray-100">';
+                h += '<span class="text-gray-400 uppercase tracking-wider font-bold shrink-0" style="font-size:10px;">' + r[0] + '</span>';
+                h += '<span class="text-gray-800 font-medium text-right">' + r[1] + '</span>';
+                h += '</div>';
+            });
+            h += '</div>';
+
+            // CRZ Constraints (Tree #1 only)
+            if (t.constraints && t.constraints.length > 0) {
+                h += '<div class="border border-green-200 rounded-lg p-4 bg-green-50">';
+                h += '<h4 class="text-xs font-bold text-green-800 uppercase tracking-wider mb-2">CRZ Field Constraints</h4>';
+                h += '<div class="space-y-1.5 text-xs">';
+                t.constraints.forEach(function(c) {
+                    var isRed = c.indexOf('⚠') !== -1;
+                    h += '<p class="' + (isRed ? 'text-red-600 font-semibold' : 'text-gray-700') + '">' + c + '</p>';
+                });
+                h += '</div></div>';
+            }
+
+            // Wall note (Tree #1)
+            if (t.id === 1) {
+                h += '<div class="border-2 border-red-300 rounded-lg p-4 bg-red-50">';
+                h += '<h4 class="text-xs font-bold text-red-700 uppercase tracking-wider mb-1">2020 Wall Impact</h4>';
+                h += '<p class="text-xs text-red-800">' + t.wallNote + '</p>';
+                h += '<p class="text-xs text-red-700 mt-1 font-medium">' + t.slope + '</p>';
+                h += '</div>';
+            }
+
+            // Primary Concerns
+            h += '<div>';
+            h += '<h4 class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Primary Concerns</h4>';
+            h += '<div class="space-y-2">';
+            t.concerns.forEach(function(c, i) {
+                h += '<div class="bg-gray-50 rounded-lg p-3 border border-gray-100">';
+                h += '<p class="text-xs font-bold text-gray-800">' + (i + 1) + '. ' + c.title + '</p>';
+                h += '<p class="text-xs text-gray-600 mt-1">' + c.detail + '</p>';
+                h += '</div>';
+            });
+            h += '</div></div>';
+
+            // Phase 1 Treatment
+            h += '<div class="border-t border-gray-200 pt-4">';
+            h += '<h4 class="text-xs font-bold uppercase tracking-wider mb-2" style="color:' + t.color + '">Phase 1 Treatment</h4>';
+            h += '<div class="space-y-2">';
+            t.treatment.forEach(function(tx) {
+                h += '<div class="bg-gray-50 rounded-lg p-3 border border-gray-100">';
+                h += '<p class="text-xs font-bold text-gray-800">' + tx.step + '. ' + tx.method + '</p>';
+                h += '<p class="text-xs text-gray-600 mt-1">' + tx.desc + '</p>';
+                h += '</div>';
+            });
+            h += '</div></div>';
+
+            panelBody.innerHTML = h;
+            panel.classList.add('open');
+        }
+
+        document.getElementById('panel-close-g4h4').addEventListener('click', function() {
+            panel.classList.remove('open');
+        });
+
+        // Click tree markers
+        document.querySelectorAll('.tree-hit').forEach(function(g) {
+            g.addEventListener('click', function(e) {
+                e.stopPropagation();
+                openTreePanel(parseInt(g.getAttribute('data-tree')));
+            });
+        });
+
+        // SVG click to close panel
+        var siteSvg = document.getElementById('site-svg-k1l2');
+        if (siteSvg) {
+            siteSvg.addEventListener('click', function(e) {
+                if (!e.target.closest('.tree-hit')) {
+                    panel.classList.remove('open');
+                }
+            });
+        }
+
+        // ═══ TOOLTIP ═══
+        var tooltip = document.getElementById('tooltip-k6l6');
+        document.querySelectorAll('.tree-hit').forEach(function(g) {
+            g.addEventListener('mouseenter', function() {
+                var tid = parseInt(g.getAttribute('data-tree'));
+                var t = TREES.find(function(tr) { return tr.id === tid; });
+                if (!t) return;
+                tooltip.innerHTML = '<div style="font-weight:700;color:' + t.color + ';margin-bottom:3px;">' + t.badge + ' ' + t.name + '</div>' +
+                    '<div style="color:#64748b;font-size:11px;"><em>' + t.sci + '</em></div>' +
+                    '<div style="color:#475569;margin-top:3px;">Circ: ' + t.circ.split('(')[0].trim() + ' | Ht: ' + t.height + '</div>' +
+                    '<div style="color:#475569;margin-top:1px;">Condition: ' + t.condition.split('—')[0].trim() + '</div>';
+                tooltip.classList.remove('hidden');
+            });
+            g.addEventListener('mousemove', function(e) {
+                var x = e.clientX + 16;
+                var y = e.clientY - 10;
+                tooltip.style.left = Math.min(x, window.innerWidth - 280) + 'px';
+                tooltip.style.top = Math.min(y, window.innerHeight - 100) + 'px';
+            });
+            g.addEventListener('mouseleave', function() {
+                tooltip.classList.add('hidden');
+            });
+        });
+
+        // ═══ CONCERN ACCORDIONS ═══
+        document.querySelectorAll('.concern-acc').forEach(function(card) {
+            card.addEventListener('click', function() {
+                card.classList.toggle('open');
+            });
+        });
+    </script>
+</body>
+</html>
